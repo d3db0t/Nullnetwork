@@ -2,6 +2,7 @@ import re
 import commands
 import os
 import time
+import sys
 
 class Nullnetwork:
 
@@ -11,6 +12,19 @@ class Nullnetwork:
 		self.monitor   = ""
 		self.bssid     = ""
 		self.channel   = ""
+
+
+	def banner(self):
+		sys.stdout.write("""
+             __       _ _            _                      _
+          /\ \ \_   _| | |_ __   ___| |___      _____  _ __| | __
+         /  \/ / | | | | | '_ \ / _ \ __\ \ /\ / / _ \| '__| |/ /
+        / /\  /| |_| | | | | | |  __/ |_ \ V  V / (_) | |  |   <
+        \_\ \/  \__,_|_|_|_| |_|\___|\__| \_/\_/ \___/|_|  |_|\_|
+
+                        +-+-+ +-+-+-+-+-+-+
+                        |b|y| |D|3|d|b|0|t|
+                        +-+-+ +-+-+-+-+-+-+ """ + "\n")
 
 
 	def getInterface(self):
@@ -79,6 +93,7 @@ class Nullnetwork:
 			print "Final Airodump failed :("
 #-------------------------------------------------------
 N = Nullnetwork()
+N.banner()
 N.getInterface()
 N.killProcess()
 N.startAirmon()

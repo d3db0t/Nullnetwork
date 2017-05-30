@@ -6,29 +6,30 @@ import sys
 
 class Nullnetwork:
 
-	# Colors
-	BLUE, RED, WHITE, YELLOW, MAGENTA, GREEN, END = '\33[94m', '\033[91m',
-	'\33[97m', '\33[93m', '\033[1;35m', '\033[1;32m', '\033[0m'
-
 
 	def __init__(self):
 		self.interface = ""
 		self.monitor   = ""
 		self.bssid     = ""
 		self.channel   = ""
+		# Colors
+		self.BLUE, self.RED, self.WHITE, self.YELLOW, self.MAGENTA, self.GREEN, self.END = '\33[94m', '\033[91m','\33[97m', '\33[93m', '\033[1;35m', '\033[1;32m', '\033[0m'
 
 
 	def banner(self):
-		sys.stdout.write("""
+		sys.stdout.write("""{0}
              __       _ _            _                      _
           /\ \ \_   _| | |_ __   ___| |___      _____  _ __| | __
          /  \/ / | | | | | '_ \ / _ \ __\ \ /\ / / _ \| '__| |/ /
-        / /\  /| |_| | | | | | |  __/ |_ \ V  V / (_) | |  |   <
-        \_\ \/  \__,_|_|_|_| |_|\___|\__| \_/\_/ \___/|_|  |_|\_|
+        / /\  /| |_| | | | | | |  __/ |_ \ V  V / (_) | |  |   <{1}
+        \_\ \/  \__,_|_|_|_| |_|\___|\__| \_/\_/ \___/|_|  |_|\_|{2}
 
-                        +-+-+ +-+-+-+-+-+-+
-                        |b|y| |D|3|d|b|0|t|
-                        +-+-+ +-+-+-+-+-+-+ """ + "\n")
+                        """.format(self.RED, self.BLUE, self.END) + "\n" + " "*20
+						+ "{0}Made By: {1}Shady Tantawy {2}(d3db0t){3}".format(
+						self.BLUE, self.YELLOW, self.MAGENTA, self.END) + "\n"
+						+ " "*20 + "{0}Github: {1}http://github.com/d3db0t{2}".format(self.BLUE, self.YELLOW,
+						self.END) + "\n" + " "*20 + "{0}Email: {1}ShadyTantawy@protonmail.com{2}"
+						.format(self.BLUE, self.YELLOW, self.END) + "\n")
 
 
 	def getInterface(self):
@@ -37,7 +38,7 @@ class Nullnetwork:
 			i = re.search('(w).*(:)', str).group(0)[:-1]
 			#print i.group(0)[:-1]
 		except:
-			print RED + "No Match Found!"
+			print "{0}No Match Found!{1}".format(self.RED, self.END)
 			i = raw_input("Network Interface: ")
 		if "mon" in i:
 			self.monitor = i
@@ -46,12 +47,12 @@ class Nullnetwork:
 
 
 	def killProcess(self):
-		print "Killing process...",
+		print "{0}Killing process...{1}".format(self.BLUE,self.END),
 		try:
 			os.system("airmon-ng check kill")
-			print "OK"
+			print "{0}OK{1}".format(self.YELLOW, self.END)
 		except:
-			print RED + "Unable to kill process :("
+			print "{0}Unable to kill process :({1}".format(self.RED, self.END)
 
 
 	def startAirmon(self):
@@ -61,7 +62,7 @@ class Nullnetwork:
 				self.interface = i
 			os.system("airmon-ng start " + self.interface)
 		except:
-			print RED + "Airmon failed to start :("
+			print "{0}Airmon failed to start :({1}".format(self.RED, self.END)
 
 
 	def airodump_ng(self):
@@ -80,7 +81,7 @@ class Nullnetwork:
 		try:
 			os.system("aireplay-ng -0 0 -a " + self.bssid + " " + self.monitor)
 		except:
-			print RED + "Aireplay failed :("
+			print "{0}Aireplay failed :({1}".format(self.RED, self.END)
 
 
 	def getChannel(self):
@@ -94,7 +95,7 @@ class Nullnetwork:
 				+ " --bssid " + self.bssid + " -w psk "
 					+ self.monitor)
 		except:
-			print RED + "Final Airodump failed :("
+			print "{0}Final Airodump failed :({1}".format(self.RED, self.END)
 #-------------------------------------------------------
 N = Nullnetwork()
 N.banner()

